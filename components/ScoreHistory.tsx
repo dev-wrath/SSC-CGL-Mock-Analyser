@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import type { MockScore } from '../types';
 import { SECTIONS } from '../constants';
 import ExportControls from './ExportControls';
@@ -10,14 +10,55 @@ interface ScoreHistoryProps {
 }
 
 const ScoreHistory: React.FC<ScoreHistoryProps> = ({ scores, onDeleteScore }) => {
+    const [startDate, setStartDate] = useState('');
+    const [endDate, setEndDate] = useState('');
+
+    const filteredScores = scores.filter(score => {
+        if (startDate && score.date < startDate) {
+            return false;
+        }
+        if (endDate && score.date > endDate) {
+            return false;
+        }
+        return true;
+    });
+
     return (
         <div className="cyber-card p-6">
             <div className="flex justify-between items-center mb-4">
                 <h2 className="text-xl font-bold text-white">Score History</h2>
-                {scores.length > 0 && <ExportControls scores={scores} />}
+                {scores.length > 0 && <ExportControls scores={filteredScores} />}
             </div>
-            <div className="overflow-x-auto max-h-96">
-                {scores.length > 0 ? (
+
+            {scores.length > 0 && (
+                 <div className="flex gap-4 items-center mb-4">
+                    <div className="flex-1">
+                        <label htmlFor="startDate" className="text-xs text-cyan-400/80 block mb-1">From</label>
+                        <input
+                            type="date"
+                            id="startDate"
+                            value={startDate}
+                            onChange={(e) => setStartDate(e.target.value)}
+                            className="input-cyber w-full text-white rounded-lg p-2 text-sm"
+                        />
+                    </div>
+                    <div className="flex-1">
+                        <label htmlFor="endDate" className="text-xs text-cyan-400/80 block mb-1">To</label>
+                        <input
+                            type="date"
+                            id="endDate"
+                            value={endDate}
+                            onChange={(e) => setEndDate(e.target.value)}
+                            className="input-cyber w-full text-white rounded-lg p-2 text-sm"
+                        />
+                    </div>
+                </div>
+            )}
+
+            <div className="overflow-x-auto max-h-80">
+                {scores.length === 0 ? (
+                    <p className="text-center text-gray-500 py-4">No history available.</p>
+                ) : filteredScores.length > 0 ? (
                     <table className="w-full text-sm text-left text-gray-400">
                         <thead className="text-xs text-cyan-400 uppercase bg-cyan-500/10 sticky top-0" style={{ backdropFilter: 'blur(10px)'}}>
                             <tr>
@@ -28,7 +69,7 @@ const ScoreHistory: React.FC<ScoreHistoryProps> = ({ scores, onDeleteScore }) =>
                             </tr>
                         </thead>
                         <tbody>
-                            {scores.slice().reverse().map((score) => (
+                            {filteredScores.slice().reverse().map((score) => (
                                 <tr key={score.id} className="border-b border-cyan-400/20 hover:bg-cyan-400/10 transition-colors">
                                     <td className="px-4 py-3 font-medium text-white whitespace-nowrap">{score.date}</td>
                                     {SECTIONS.map(s => <td key={s.id} className="px-2 py-3 text-center">{score[s.id]}</td>)}
@@ -41,7 +82,7 @@ const ScoreHistory: React.FC<ScoreHistoryProps> = ({ scores, onDeleteScore }) =>
                         </tbody>
                     </table>
                 ) : (
-                    <p className="text-center text-gray-500 py-4">No history available.</p>
+                    <p className="text-center text-gray-500 py-4">No scores found for the selected date range.</p>
                 )}
             </div>
         </div>

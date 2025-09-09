@@ -5,6 +5,7 @@ import Header from './components/Header';
 import ScoreInputForm from './components/ScoreInputForm';
 import ScoreHistory from './components/ScoreHistory';
 import Dashboard from './components/Dashboard';
+import Footer from './components/Footer';
 import { MAX_MARKS } from './constants';
 
 const getInitialScores = (): MockScore[] => {
@@ -59,9 +60,9 @@ const App: React.FC = () => {
     };
     
     return (
-        <div className="min-h-screen">
+        <div className="min-h-screen flex flex-col">
             <Header />
-            <main className="container mx-auto p-4 lg:p-8">
+            <main className="container mx-auto p-4 lg:p-8 flex-grow">
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                     <div className="lg:col-span-1 flex flex-col gap-8">
                         <ScoreInputForm onAddScore={addScore} />
@@ -72,6 +73,7 @@ const App: React.FC = () => {
                     </div>
                 </div>
             </main>
+            <Footer />
         </div>
     );
 };
