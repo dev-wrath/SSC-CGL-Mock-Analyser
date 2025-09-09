@@ -1,0 +1,5 @@
+{
+  "name": "SSC CGL Mock Score Tracker",
+  "description": "An application to track and visualize your mock test scores for the SSC CGL exam. Enter your sectional marks to see your overall performance, track progress over time, and compare against sectional cutoffs.",
+  "requestFramePermissions": []
+}

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SSC CGL Mock Score Tracker</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/react/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/recharts/umd/Recharts.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script>
+      window.jsPDF = window.jspdf.jsPDF;
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf-autotable.umd.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://aistudiocdn.com/react@^19.1.1/",
+    "react": "https://aistudiocdn.com/react@^19.1.1",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.1.1/",
+    "recharts": "https://aistudiocdn.com/recharts@^3.2.0"
+  }
+}
+</script>
+  <style>
+    :root {
+      --cyber-cyan: #08f7fe;
+      --cyber-fuchsia: #d946ef;
+      --cyber-yellow: #facc15;
+      --cyber-lime: #a3e635;
+      --cyber-bg-dark: #0a0a14;
+      --cyber-border-color: rgba(8, 247, 254, 0.4);
+      --cyber-card-bg: rgba(10, 10, 20, 0.6);
+    }
+    body {
+      background-color: var(--cyber-bg-dark);
+      background-image: 
+        linear-gradient(var(--cyber-border-color) 1px, transparent 1px),
+        linear-gradient(to right, var(--cyber-border-color) 1px, var(--cyber-bg-dark) 1px);
+      background-size: 40px 40px;
+      font-family: 'Orbitron', sans-serif;
+    }
+    .cyber-card {
+      background: var(--cyber-card-bg);
+      border: 1px solid var(--cyber-border-color);
+      box-shadow: 0 0 20px rgba(8, 247, 254, 0.15);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+      clip-path: polygon(0 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%);
+    }
+    .cyber-button {
+      background: transparent;
+      border: 1px solid var(--cyber-cyan);
+      color: var(--cyber-cyan);
+      clip-path: polygon(calc(0% + 10px) 0, 100% 0, 100% 100%, 0 100%, 0 calc(0% + 10px));
+      transition: all 0.2s ease-in-out;
+      text-transform: uppercase;
+    }
+    .cyber-button:hover {
+      background: var(--cyber-cyan);
+      color: var(--cyber-bg-dark);
+      box-shadow: 0 0 20px var(--cyber-cyan);
+    }
+    .cyber-glow {
+      text-shadow: 0 0 5px var(--cyber-cyan), 0 0 10px var(--cyber-cyan);
+    }
+    .input-cyber {
+       background-color: rgba(0,0,0,0.3);
+       border: 1px solid var(--cyber-border-color);
+    }
+    .input-cyber:focus {
+        outline: none;
+        box-shadow: 0 0 10px var(--cyber-cyan);
+        border-color: var(--cyber-cyan);
+    }
+    .input-cyber::placeholder {
+      color: rgba(8, 247, 254, 0.6);
+      opacity: 1; /* For Firefox */
+      font-style: italic;
+    }
+  </style>
+</head>
+  <body class="text-gray-200">
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>
